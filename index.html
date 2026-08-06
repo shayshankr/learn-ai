@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learn AI — a friendly, hands-on course</title>
+<meta name="description" content="A free, interactive course teaching you how to actually use AI tools — chatbots, coding assistants, image generators, agents, and more.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="index.html" class="brand"><span class="logo-dot">🤖</span> Learn AI</a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Course</a>
+      <a href="lessons/01-what-is-ai.html">Start Lesson 1</a>
+      <a href="https://github.com/shayshankr/learn-ai" target="_blank" rel="noopener">GitHub</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
+    </div>
+  </div>
+</nav>
+
+<header class="wrap" style="padding: 80px 24px 40px;">
+  <span class="pill">Free · No sign-up · 100% browser-based</span>
+  <h1 style="margin-top:18px;">Learn AI, one 10-minute lesson at a time.</h1>
+  <p style="font-size:1.15rem; max-width:640px;">A hands-on course for absolute beginners. No math, no jargon walls — just what today's AI tools actually do, and how to start using them well. Every lesson has something you can click, drag, or type.</p>
+  <div style="display:flex; gap:14px; margin-top:28px; flex-wrap:wrap;">
+    <a href="lessons/01-what-is-ai.html" class="btn btn-primary">Start with Lesson 1 →</a>
+    <a href="#map" class="btn btn-ghost">See the full course</a>
+  </div>
+
+  <div style="margin-top:44px; max-width:420px;">
+    <div style="display:flex; justify-content:space-between; font-size:0.82rem; color:var(--text-faint); margin-bottom:8px;">
+      <span>Your progress</span>
+      <span id="progress-label">0 / 8 lessons</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  </div>
+</header>
+
+<main class="wrap" id="map" style="padding-bottom:80px;">
+  <h2>The course map</h2>
+  <p>Lessons build loosely on each other, but feel free to jump around — click into whatever your friend is curious about first.</p>
+
+  <div class="lesson-grid">
+
+    <a class="lesson-card" data-id="what-is-ai" href="lessons/01-what-is-ai.html">
+      <span class="done-badge">✓</span>
+      <span class="num">01 · 8 min</span>
+      <h3>What is AI, actually?</h3>
+      <p>AI vs. machine learning vs. LLMs, explained without the hand-waving. Flip-card glossary + quiz.</p>
+    </a>
+
+    <a class="lesson-card" data-id="chatbots-101" href="lessons/02-chatbots-101.html">
+      <span class="done-badge">✓</span>
+      <span class="num">02 · 10 min</span>
+      <h3>Chatbots 101</h3>
+      <p>ChatGPT, Claude, Gemini — what they're good at, and a simulated chat you can play with right on the page.</p>
+    </a>
+
+    <a class="lesson-card" data-id="prompt-engineering" href="lessons/03-prompt-engineering.html">
+      <span class="done-badge">✓</span>
+      <span class="num">03 · 12 min</span>
+      <h3>Prompt Engineering</h3>
+      <p>Why some prompts get great answers and others don't. Build a prompt piece by piece in the interactive builder.</p>
+    </a>
+
+    <a class="lesson-card" data-id="coding-assistants" href="lessons/04-ai-coding-assistants.html">
+      <span class="done-badge">✓</span>
+      <span class="num">04 · 10 min</span>
+      <h3>AI Coding Assistants</h3>
+      <p>Copilot, Cursor, Claude Code — for people who write code (or want to start). See a before/after live.</p>
+    </a>
+
+    <a class="lesson-card" data-id="image-video-gen" href="lessons/05-image-video-generation.html">
+      <span class="done-badge">✓</span>
+      <span class="num">05 · 9 min</span>
+      <h3>Image &amp; Video Generation</h3>
+      <p>Midjourney, DALL·E, Runway — how text-to-image actually works, and a style-picker demo.</p>
+    </a>
+
+    <a class="lesson-card" data-id="no-code-builders" href="lessons/06-no-code-ai-builders.html">
+      <span class="done-badge">✓</span>
+      <span class="num">06 · 9 min</span>
+      <h3>No-Code AI Builders</h3>
+      <p>Zapier, n8n, Bolt, Lovable — build automations and apps by describing them. Drag the workflow diagram.</p>
+    </a>
+
+    <a class="lesson-card" data-id="ai-agents" href="lessons/07-ai-agents.html">
+      <span class="done-badge">✓</span>
+      <span class="num">07 · 10 min</span>
+      <h3>AI Agents</h3>
+      <p>What makes an "agent" different from a chatbot. Watch the think → act → observe loop animate step by step.</p>
+    </a>
+
+    <a class="lesson-card" data-id="using-ai-responsibly" href="lessons/08-using-ai-responsibly.html">
+      <span class="done-badge">✓</span>
+      <span class="num">08 · 8 min</span>
+      <h3>Using AI Responsibly</h3>
+      <p>Hallucinations, privacy, and how to verify what AI tells you. Spot-the-hallucination challenge included.</p>
+    </a>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Built by <a href="https://github.com/shayshankr" target="_blank" rel="noopener">Shayshank Rathore</a>, with Claude. Open source — fork it, remix it, teach someone.</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script>
+  (function () {
+    const total = 8;
+    const progress = window.getProgress ? window.getProgress() : {};
+    function paint() {
+      const p = JSON.parse(localStorage.getItem('learnai-progress') || '{}');
+      const count = Object.values(p).filter(Boolean).length;
+      document.getElementById('progress-label').textContent = count + ' / ' + total + ' lessons';
+      document.getElementById('progress-fill').style.width = (count / total * 100) + '%';
+      document.querySelectorAll('.lesson-card').forEach(card => {
+        if (p[card.dataset.id]) card.classList.add('done');
+      });
+    }
+    document.addEventListener('DOMContentLoaded', paint);
+  })();
+</script>
+</body>
+</html>

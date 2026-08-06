@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Coding Assistants — Learn AI</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-lesson="coding-assistants">
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="../index.html" class="brand"><span class="logo-dot">🤖</span> Learn AI</a>
+    <div class="nav-links">
+      <a href="../index.html">Course</a>
+      <a href="#" class="active">Lesson 4</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
+    </div>
+  </div>
+</nav>
+
+<header class="wrap lesson-hero">
+  <div class="lesson-meta">
+    <span class="pill">Lesson 04</span>
+    <span style="color:var(--text-faint); font-size:0.85rem;">10 min read</span>
+  </div>
+  <h1>AI Coding Assistants</h1>
+  <p style="font-size:1.1rem; max-width:640px;">For anyone who writes code — or wants to start. These tools read and write code alongside you, in your actual editor.</p>
+</header>
+
+<main class="wrap lesson-body">
+
+  <section>
+    <h2>The landscape</h2>
+    <div class="tool-compare">
+      <div class="tool-card"><span class="icon">🧑‍💻</span><h4>GitHub Copilot</h4><ul><li>Autocompletes as you type</li><li>Built into VS Code, JetBrains</li><li>Great first tool to try</li></ul></div>
+      <div class="tool-card"><span class="icon">📝</span><h4>Cursor</h4><ul><li>A full editor built around AI</li><li>Can edit multiple files at once</li><li>Popular for building whole projects</li></ul></div>
+      <div class="tool-card"><span class="icon">⌨️</span><h4>Claude Code</h4><ul><li>Runs in your terminal</li><li>Can plan, edit, run commands, test</li><li>Good for larger, multi-step tasks</li></ul></div>
+      <div class="tool-card"><span class="icon">🌐</span><h4>Replit / v0 / Bolt</h4><ul><li>Browser-based, no setup</li><li>Describe an app, get a working start</li><li>Best for absolute beginners</li></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>See it in action: before → after</h2>
+    <p>Click "Ask the assistant" to see the kind of fix an AI coding tool would suggest for a small, real bug.</p>
+
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+        <span class="pill" id="codeStage">Before</span>
+        <button class="btn btn-primary btn-sm" onclick="runCodeDemo()" id="codeDemoBtn">Ask the assistant to fix this ▶</button>
+      </div>
+      <pre style="background:var(--panel-2); padding:18px; border-radius:10px; overflow-x:auto; font-size:0.85rem; line-height:1.7;" id="codeBlock">function getTotal(items) {
+  let total;
+  for (let i = 0; i <= items.length; i++) {
+    total += items[i].price;
+  }
+  return total;
+}</pre>
+      <div id="codeExplain" style="display:none; margin-top:14px;">
+        <div class="callout tip">
+          <span class="callout-label">🔧 What the assistant caught</span>
+          <p style="margin:0;"><code>total</code> starts <code>undefined</code> instead of <code>0</code>, and <code>i &lt;= items.length</code> reads one item past the end of the array. Both would crash or return <code>NaN</code> — the kind of bug that's easy to miss reading quickly, but obvious once pointed out.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Good habits from day one</h2>
+    <div class="callout tip">
+      <span class="callout-label">💡 Treat it like a fast junior collaborator</span>
+      <p>It writes quickly but doesn't know your intent unless you tell it. Review what it changes, run the code, and ask it to explain anything unfamiliar — don't paste-and-hope.</p>
+    </div>
+    <div class="callout warn">
+      <span class="callout-label">⚠️ Never paste real secrets</span>
+      <p>Don't paste API keys, passwords, or production database credentials into any AI chat — treat prompts like they might be logged somewhere.</p>
+    </div>
+  </section>
+
+  <div style="text-align:center; margin-top:20px;">
+    <button class="btn btn-primary" onclick="markLessonComplete()">Mark lesson complete ✓</button>
+    <p id="complete-marker" style="margin-top:10px; color:var(--accent-3); font-size:0.9rem;"></p>
+  </div>
+
+  <div class="lesson-nav-footer">
+    <a href="03-prompt-engineering.html" class="nav-card"><small>Previous</small><span>← Prompt Engineering</span></a>
+    <a href="05-image-video-generation.html" class="nav-card next"><small>Next lesson</small><span>Image & Video Gen →</span></a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap"><p>Built by <a href="https://github.com/shayshankr" target="_blank" rel="noopener">Shayshank Rathore</a>, with Claude.</p></div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+<script>
+  function runCodeDemo() {
+    document.getElementById('codeBlock').textContent = `function getTotal(items) {
+  let total = 0;
+  for (let i = 0; i < items.length; i++) {
+    total += items[i].price;
+  }
+  return total;
+}`;
+    document.getElementById('codeStage').textContent = 'After — fixed';
+    document.getElementById('codeExplain').style.display = 'block';
+    document.getElementById('codeDemoBtn').disabled = true;
+    document.getElementById('codeDemoBtn').textContent = '✓ Fixed';
+  }
+</script>
+</body>
+</html>

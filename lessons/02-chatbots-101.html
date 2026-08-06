@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chatbots 101 — Learn AI</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-lesson="chatbots-101">
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="../index.html" class="brand"><span class="logo-dot">🤖</span> Learn AI</a>
+    <div class="nav-links">
+      <a href="../index.html">Course</a>
+      <a href="#" class="active">Lesson 2</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
+    </div>
+  </div>
+</nav>
+
+<header class="wrap lesson-hero">
+  <div class="lesson-meta">
+    <span class="pill">Lesson 02</span>
+    <span style="color:var(--text-faint); font-size:0.85rem;">10 min read</span>
+  </div>
+  <h1>Chatbots 101</h1>
+  <p style="font-size:1.1rem; max-width:640px;">ChatGPT, Claude, Gemini, Copilot Chat — they all look like a text box. Here's what's actually different between them, and how to try one out.</p>
+</header>
+
+<main class="wrap lesson-body">
+
+  <section>
+    <h2>Meet the big three (plus one)</h2>
+    <p>These are general-purpose AI assistants: you type a question or task in plain English, and they respond in plain English. No installation, no coding.</p>
+
+    <div class="tool-compare">
+      <div class="tool-card">
+        <span class="icon">💬</span>
+        <h4>ChatGPT (OpenAI)</h4>
+        <p style="font-size:0.85rem; margin:0;">The one most people have heard of. Huge plugin/app ecosystem, strong at general tasks and image generation built in.</p>
+      </div>
+      <div class="tool-card">
+        <span class="icon">🧠</span>
+        <h4>Claude (Anthropic)</h4>
+        <p style="font-size:0.85rem; margin:0;">Known for careful, well-reasoned writing and strong coding help. Good default if your friend will use AI for writing or analysis.</p>
+      </div>
+      <div class="tool-card">
+        <span class="icon">✨</span>
+        <h4>Gemini (Google)</h4>
+        <p style="font-size:0.85rem; margin:0;">Deeply integrated with Google Search, Docs, and Gmail — handy if your friend already lives in Google's ecosystem.</p>
+      </div>
+      <div class="tool-card">
+        <span class="icon">🧑‍💻</span>
+        <h4>Copilot (Microsoft)</h4>
+        <p style="font-size:0.85rem; margin:0;">Built into Windows and Office. Good starting point for someone who's never touched an AI tool before.</p>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <span class="callout-label">💡 Which one should a beginner pick?</span>
+      <p>Honestly, any of them. They're all free to start, and the skills transfer between them almost completely. Pick whichever is easiest to sign up for and just start typing.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Try a simulated chat</h2>
+    <p>This isn't a real AI — it's a scripted demo so you can see the shape of a conversation without needing an account. Type one of the suggested messages (or anything) and hit send.</p>
+
+    <div class="chat-box">
+      <div class="chat-header"><span class="chat-dot" style="background:var(--accent-3);"></span> demo-assistant · simulated, not a real model</div>
+      <div class="chat-log" id="chatlog">
+        <div class="msg ai">Hi! I'm a scripted demo, not a real AI — but this is roughly the back-and-forth you'd have with ChatGPT or Claude. Try asking me to explain something, write something, or plan something.</div>
+      </div>
+      <div class="chat-input-row">
+        <input id="chatinput" type="text" placeholder="Try: explain photosynthesis to a 10 year old" />
+        <button class="btn btn-primary btn-sm" onclick="sendDemoMsg()">Send</button>
+      </div>
+    </div>
+    <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;">
+      <button class="btn btn-ghost btn-sm" onclick="fillDemo('Explain photosynthesis to a 10 year old')">explain photosynthesis...</button>
+      <button class="btn btn-ghost btn-sm" onclick="fillDemo('Write a birthday message for my sister')">write a birthday message...</button>
+      <button class="btn btn-ghost btn-sm" onclick="fillDemo('Plan a 3-day trip to Goa')">plan a trip to Goa...</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>What chatbots are great at — and what they're not</h2>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+      <div class="card">
+        <h3 style="margin-top:0;">✅ Good at</h3>
+        <ul style="color:var(--text-dim); padding-left:20px;">
+          <li>Explaining concepts in different ways until it clicks</li>
+          <li>First drafts — emails, messages, outlines</li>
+          <li>Brainstorming and rubber-ducking ideas</li>
+          <li>Summarizing long text you paste in</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0;">⚠️ Be careful with</h3>
+        <ul style="color:var(--text-dim); padding-left:20px;">
+          <li>Very recent events (knowledge has a cutoff date)</li>
+          <li>Exact facts, stats, citations — it can sound confident and still be wrong</li>
+          <li>Anything you paste that's private or sensitive</li>
+          <li>Math done purely "in its head" without a tool</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:16px;">We'll go deeper on the "sounding confident but wrong" problem — called <strong>hallucination</strong> — in Lesson 8.</p>
+  </section>
+
+  <div style="text-align:center; margin-top:20px;">
+    <button class="btn btn-primary" onclick="markLessonComplete()">Mark lesson complete ✓</button>
+    <p id="complete-marker" style="margin-top:10px; color:var(--accent-3); font-size:0.9rem;"></p>
+  </div>
+
+  <div class="lesson-nav-footer">
+    <a href="01-what-is-ai.html" class="nav-card"><small>Previous</small><span>← What is AI?</span></a>
+    <a href="03-prompt-engineering.html" class="nav-card next"><small>Next lesson</small><span>Prompt Engineering →</span></a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap"><p>Built by <a href="https://github.com/shayshankr" target="_blank" rel="noopener">Shayshank Rathore</a>, with Claude.</p></div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+<script>
+  function fillDemo(text) {
+    document.getElementById('chatinput').value = text;
+    document.getElementById('chatinput').focus();
+  }
+
+  const demoReplies = [
+    { match: /photosynthesis/i, reply: "Sure! Plants eat sunlight instead of food. They grab sunlight, water, and air, and turn it into sugar for energy — and breathe out the oxygen we need. It's like a tiny solar-powered kitchen inside every leaf. 🌱" },
+    { match: /birthday/i, reply: "Here's a draft: \"Happy birthday! Hope your day is filled with all your favorite things and a little extra cake. Can't wait to celebrate with you soon. Love you!\" Want it more funny, more short, or more heartfelt?" },
+    { match: /goa/i, reply: "Rough 3-day Goa plan: Day 1 — North Goa beaches (Baga, Anjuna) + sunset at a beach shack. Day 2 — Old Goa churches + spice plantation tour. Day 3 — South Goa's quieter beaches (Palolem) + seafood dinner. Want a budget breakdown too?" }
+  ];
+
+  function sendDemoMsg() {
+    const input = document.getElementById('chatinput');
+    const text = input.value.trim();
+    if (!text) return;
+    const log = document.getElementById('chatlog');
+
+    const userMsg = document.createElement('div');
+    userMsg.className = 'msg user';
+    userMsg.textContent = text;
+    log.appendChild(userMsg);
+    input.value = '';
+    log.scrollTop = log.scrollHeight;
+
+    setTimeout(() => {
+      const found = demoReplies.find(r => r.match.test(text));
+      const reply = found ? found.reply : "That's a fun one — in a real assistant I'd actually think this through and reply properly. This demo only knows a few scripted topics: try the suggestion buttons below the chat!";
+      const aiMsg = document.createElement('div');
+      aiMsg.className = 'msg ai';
+      aiMsg.textContent = reply;
+      log.appendChild(aiMsg);
+      log.scrollTop = log.scrollHeight;
+    }, 500);
+  }
+
+  document.getElementById('chatinput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') sendDemoMsg();
+  });
+</script>
+</body>
+</html>

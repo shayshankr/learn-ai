@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agents — Learn AI</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-lesson="ai-agents">
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="../index.html" class="brand"><span class="logo-dot">🤖</span> Learn AI</a>
+    <div class="nav-links">
+      <a href="../index.html">Course</a>
+      <a href="#" class="active">Lesson 7</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
+    </div>
+  </div>
+</nav>
+
+<header class="wrap lesson-hero">
+  <div class="lesson-meta">
+    <span class="pill">Lesson 07</span>
+    <span style="color:var(--text-faint); font-size:0.85rem;">10 min read</span>
+  </div>
+  <h1>AI Agents</h1>
+  <p style="font-size:1.1rem; max-width:640px;">A chatbot answers one question at a time. An <strong>agent</strong> keeps working — using tools, checking its own results, and taking several steps toward a goal.</p>
+</header>
+
+<main class="wrap lesson-body">
+
+  <section>
+    <h2>Chatbot vs. agent</h2>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+      <div class="card">
+        <h3 style="margin-top:0;">💬 Plain chatbot</h3>
+        <p>You ask, it answers using only what it already knows. One turn, done. If it needs current information or to actually do something, it can't.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0;">🤖 Agent</h3>
+        <p>Given a goal, it plans steps, uses tools (search the web, run code, read a file, call an API), looks at the result, and decides what to do next — on a loop, until the goal is done.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Watch the loop run</h2>
+    <p>This is the core pattern behind every AI agent — including the one writing this course. Press play to step through it for a real task.</p>
+
+    <div class="card">
+      <p style="margin-top:0; font-size:0.9rem; color:var(--text-faint);">Goal: <em>"Find out if it's going to rain tomorrow and draft a message to reschedule the picnic if so."</em></p>
+      <div id="agentSteps" style="display:flex; flex-direction:column; gap:10px; min-height:180px;"></div>
+      <button class="btn btn-primary btn-sm" onclick="runAgentDemo()" id="agentBtn" style="margin-top:14px;">▶ Run the agent loop</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Where you'll meet agents</h2>
+    <div class="tool-compare">
+      <div class="tool-card"><span class="icon">⌨️</span><h4>Claude Code / Cursor Agent</h4><p style="font-size:0.85rem; margin:0;">Plans and executes multi-file coding tasks, running commands and tests along the way.</p></div>
+      <div class="tool-card"><span class="icon">🌐</span><h4>Browser agents</h4><p style="font-size:0.85rem; margin:0;">Can click through real websites — booking, form-filling, research — on your behalf.</p></div>
+      <div class="tool-card"><span class="icon">🔌</span><h4>MCP (Model Context Protocol)</h4><p style="font-size:0.85rem; margin:0;">An open standard letting agents plug into tools like Slack, GitHub, or a database safely.</p></div>
+    </div>
+  </section>
+
+  <div class="callout warn">
+    <span class="callout-label">⚠️ More capability, more care needed</span>
+    <p>An agent that can actually click "send" or "buy" is more useful — and riskier — than one that can only talk. Good agent tools ask for confirmation before doing anything irreversible (sending money, deleting files, posting publicly). Be wary of any tool that doesn't.</p>
+  </div>
+
+  <div style="text-align:center; margin-top:20px;">
+    <button class="btn btn-primary" onclick="markLessonComplete()">Mark lesson complete ✓</button>
+    <p id="complete-marker" style="margin-top:10px; color:var(--accent-3); font-size:0.9rem;"></p>
+  </div>
+
+  <div class="lesson-nav-footer">
+    <a href="06-no-code-ai-builders.html" class="nav-card"><small>Previous</small><span>← No-Code AI Builders</span></a>
+    <a href="08-using-ai-responsibly.html" class="nav-card next"><small>Next lesson</small><span>Using AI Responsibly →</span></a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap"><p>Built by <a href="https://github.com/shayshankr" target="_blank" rel="noopener">Shayshank Rathore</a>, with Claude.</p></div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+<script>
+  const agentSteps = [
+    { icon: '🧠', label: 'Think', text: 'To answer this I need tomorrow\'s weather, then a decision, then maybe a draft message.' },
+    { icon: '🔧', label: 'Act', text: 'Tool call → check_weather("tomorrow")' },
+    { icon: '👀', label: 'Observe', text: 'Result: 80% chance of rain, heavy showers expected in the afternoon.' },
+    { icon: '🧠', label: 'Think', text: 'Rain is likely — the picnic should probably move. I\'ll draft a reschedule message.' },
+    { icon: '🔧', label: 'Act', text: 'Tool call → draft_message("Hey everyone, tomorrow\'s looking rainy — should we move the picnic to Sunday?")' },
+    { icon: '✅', label: 'Done', text: 'Goal complete — weather checked, decision made, message drafted for your review.' }
+  ];
+
+  function runAgentDemo() {
+    const container = document.getElementById('agentSteps');
+    const btn = document.getElementById('agentBtn');
+    container.innerHTML = '';
+    btn.disabled = true;
+    btn.textContent = 'Running…';
+    agentSteps.forEach((step, i) => {
+      setTimeout(() => {
+        const row = document.createElement('div');
+        row.style.cssText = 'display:flex; gap:12px; align-items:flex-start; opacity:0; transition:opacity .3s ease;';
+        row.innerHTML = `<span style="font-size:1.2rem;">${step.icon}</span><div><strong style="color:var(--accent); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.04em;">${step.label}</strong><p style="margin:2px 0 0; font-size:0.9rem; color:var(--text);">${step.text}</p></div>`;
+        container.appendChild(row);
+        requestAnimationFrame(() => row.style.opacity = '1');
+        if (i === agentSteps.length - 1) {
+          btn.textContent = '↻ Run again';
+          btn.disabled = false;
+        }
+      }, i * 900);
+    });
+  }
+</script>
+</body>
+</html>

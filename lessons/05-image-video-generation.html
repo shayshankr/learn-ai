@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image & Video Generation — Learn AI</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-lesson="image-video-gen">
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="../index.html" class="brand"><span class="logo-dot">🤖</span> Learn AI</a>
+    <div class="nav-links">
+      <a href="../index.html">Course</a>
+      <a href="#" class="active">Lesson 5</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
+    </div>
+  </div>
+</nav>
+
+<header class="wrap lesson-hero">
+  <div class="lesson-meta">
+    <span class="pill">Lesson 05</span>
+    <span style="color:var(--text-faint); font-size:0.85rem;">9 min read</span>
+  </div>
+  <h1>Image &amp; Video Generation</h1>
+  <p style="font-size:1.1rem; max-width:640px;">Type a sentence, get a picture. Here's how these tools work, what they're good for, and a style picker to get the idea.</p>
+</header>
+
+<main class="wrap lesson-body">
+
+  <section>
+    <h2>The tools</h2>
+    <div class="tool-compare">
+      <div class="tool-card"><span class="icon">🎨</span><h4>Midjourney</h4><p style="font-size:0.85rem; margin:0;">Best-in-class artistic quality. Runs through Discord, has a small learning curve.</p></div>
+      <div class="tool-card"><span class="icon">🖼️</span><h4>DALL·E</h4><p style="font-size:0.85rem; margin:0;">Built into ChatGPT — easiest way to generate an image if you're already chatting.</p></div>
+      <div class="tool-card"><span class="icon">🎬</span><h4>Runway / Sora</h4><p style="font-size:0.85rem; margin:0;">Text-to-video — describe a short clip and get moving footage. Still evolving fast.</p></div>
+      <div class="tool-card"><span class="icon">🎙️</span><h4>ElevenLabs</h4><p style="font-size:0.85rem; margin:0;">Text-to-speech and voice cloning — turns written text into natural-sounding audio.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>How it actually works (in one paragraph)</h2>
+    <p>These models were trained on huge numbers of image-caption pairs, so they learned associations between words and visual patterns. When you type a prompt, the model starts from random noise and gradually "denoises" it, step by step, toward something that matches your text — a process called <strong>diffusion</strong>. It's not retrieving a photo from a database; it's generating pixels from scratch, guided by your words.</p>
+  </section>
+
+  <section>
+    <h2>Same subject, different style prompt</h2>
+    <p>Text-to-image tools are hugely sensitive to style keywords. Click a style below to see how the prompt would change for the same subject — "a cup of coffee on a wooden table."</p>
+
+    <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;" id="styleButtons">
+      <button class="btn btn-ghost btn-sm" onclick="setStyle(0)">📷 Photorealistic</button>
+      <button class="btn btn-ghost btn-sm" onclick="setStyle(1)">🖌️ Watercolor</button>
+      <button class="btn btn-ghost btn-sm" onclick="setStyle(2)">🕹️ Pixel art</button>
+      <button class="btn btn-ghost btn-sm" onclick="setStyle(3)">📐 Minimalist line art</button>
+    </div>
+
+    <div class="card">
+      <div id="styleEmoji" style="font-size:3rem; text-align:center; margin-bottom:10px;">☕</div>
+      <p style="font-family:var(--font-mono); font-size:0.88rem; text-align:center; color:var(--text); margin:0;" id="stylePrompt">a cup of coffee on a wooden table, photorealistic, soft morning light, shallow depth of field, 50mm lens</p>
+    </div>
+  </section>
+
+  <div class="callout warn">
+    <span class="callout-label">⚠️ Worth knowing</span>
+    <p>These models were trained on huge datasets scraped from the web, which raises real questions about artist consent and copyright — still being actively debated and litigated. Be thoughtful about using AI images commercially, and never generate images of real people without their consent.</p>
+  </div>
+
+  <div style="text-align:center; margin-top:20px;">
+    <button class="btn btn-primary" onclick="markLessonComplete()">Mark lesson complete ✓</button>
+    <p id="complete-marker" style="margin-top:10px; color:var(--accent-3); font-size:0.9rem;"></p>
+  </div>
+
+  <div class="lesson-nav-footer">
+    <a href="04-ai-coding-assistants.html" class="nav-card"><small>Previous</small><span>← AI Coding Assistants</span></a>
+    <a href="06-no-code-ai-builders.html" class="nav-card next"><small>Next lesson</small><span>No-Code AI Builders →</span></a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap"><p>Built by <a href="https://github.com/shayshankr" target="_blank" rel="noopener">Shayshank Rathore</a>, with Claude.</p></div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+<script>
+  const styles = [
+    { emoji: '☕', prompt: 'a cup of coffee on a wooden table, photorealistic, soft morning light, shallow depth of field, 50mm lens' },
+    { emoji: '🎨', prompt: 'a cup of coffee on a wooden table, loose watercolor painting, soft bleeding edges, pastel palette' },
+    { emoji: '👾', prompt: 'a cup of coffee on a wooden table, 16-bit pixel art, limited color palette, retro game asset' },
+    { emoji: '✏️', prompt: 'a cup of coffee on a wooden table, minimalist single-line continuous line art, black on white' }
+  ];
+  function setStyle(i) {
+    document.getElementById('styleEmoji').textContent = styles[i].emoji;
+    document.getElementById('stylePrompt').textContent = styles[i].prompt;
+  }
+</script>
+</body>
+</html>
