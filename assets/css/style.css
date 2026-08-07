@@ -131,8 +131,14 @@ code, pre { font-family: var(--font-mono); }
 }
 .callout.warn { border-color: var(--accent-4); }
 .callout.tip { border-color: var(--accent-3); }
+.callout.real {
+  border-left-color: var(--accent-2);
+  background: linear-gradient(120deg, color-mix(in srgb, var(--accent-2) 10%, var(--panel)), var(--panel));
+}
 .callout p:last-child { margin-bottom: 0; }
 .callout-label { font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; display: block; }
+.callout.real .callout-label { color: var(--accent-2); }
+.callout.real .btn { margin-top: 12px; }
 
 .lesson-nav-footer {
   display: flex; justify-content: space-between; gap: 16px; margin-top: 60px; padding-top: 32px; border-top: 1px solid var(--border);
