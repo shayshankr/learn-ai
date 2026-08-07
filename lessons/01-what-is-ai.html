@@ -62,21 +62,21 @@
     <p>Click each card to reveal the answer.</p>
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:16px; margin-top:20px;">
 
-      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+      <div class="flip-card" tabindex="0" role="button" aria-pressed="false" onclick="this.classList.toggle('flipped')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('flipped');}">
         <div class="flip-inner">
           <div class="flip-front"><h4 style="margin:0;">Is a thermostat "AI"?</h4><p style="margin:8px 0 0; font-size:0.85rem; color:var(--text-faint);">Click to reveal</p></div>
           <div class="flip-back">Not really — it just follows a fixed rule ("if temp &lt; X, turn on heat"). No learning, no adapting. That's traditional programming, not AI.</div>
         </div>
       </div>
 
-      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+      <div class="flip-card" tabindex="0" role="button" aria-pressed="false" onclick="this.classList.toggle('flipped')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('flipped');}">
         <div class="flip-inner">
           <div class="flip-front"><h4 style="margin:0;">Is Netflix's recommender AI?</h4><p style="margin:8px 0 0; font-size:0.85rem; color:var(--text-faint);">Click to reveal</p></div>
           <div class="flip-back">Yes — it's machine learning. It learns patterns from millions of viewing histories rather than following hand-written rules.</div>
         </div>
       </div>
 
-      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+      <div class="flip-card" tabindex="0" role="button" aria-pressed="false" onclick="this.classList.toggle('flipped')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('flipped');}">
         <div class="flip-inner">
           <div class="flip-front"><h4 style="margin:0;">Is Claude an LLM?</h4><p style="margin:8px 0 0; font-size:0.85rem; color:var(--text-faint);">Click to reveal</p></div>
           <div class="flip-back">Yes — Claude is a large language model made by Anthropic, trained on text to predict and generate language, and fine-tuned to be a helpful assistant.</div>
@@ -108,6 +108,7 @@
   <div style="text-align:center; margin-top:20px;">
     <button class="btn btn-primary" onclick="markLessonComplete()">Mark lesson complete ✓</button>
     <p id="complete-marker" style="margin-top:10px; color:var(--accent-3); font-size:0.9rem;"></p>
+    <p style="margin-top:14px; font-size:0.82rem; color:var(--text-faint);">Stuck or confused on this lesson? <a href="mailto:shayshankr@gmail.com?subject=Learn%20AI%20-%20Lesson%201%20feedback">Email me</a> or <a href="https://github.com/shayshankr/learn-ai/issues/new" target="_blank" rel="noopener">open an issue</a>.</p>
   </div>
 
   <div class="lesson-nav-footer">
