@@ -49,4 +49,11 @@
   window.getProgress = function () {
     return JSON.parse(localStorage.getItem('learnai-progress') || '{}');
   };
+
+  window.resetProgress = function () {
+    if (confirm('Reset lesson progress on this device? This only affects your own browser and can\'t be undone.')) {
+      localStorage.removeItem('learnai-progress');
+      location.reload();
+    }
+  };
 })();
