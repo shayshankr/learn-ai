@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Better Context, Better Output — Learn AI</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-lesson="l2-context">
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="../index.html" class="brand"><span class="logo-dot">🤖</span> Learn AI</a>
+    <div class="nav-links">
+      <a href="../index.html">Course</a>
+      <a href="#" class="active">Level 2 · 1</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
+    </div>
+  </div>
+</nav>
+
+<header class="wrap lesson-hero">
+  <div class="lesson-meta">
+    <span class="pill level2">Level 2 · Lesson 1</span>
+    <span style="color:var(--text-faint); font-size:0.85rem;">10 min read</span>
+  </div>
+  <h1>Better Context, Better Output</h1>
+  <p style="font-size:1.1rem; max-width:640px;">You know how to prompt. This lesson is about what surrounds the prompt: what you feed it, how you shape what it hands back, and why a long chat quietly gets worse.</p>
+</header>
+
+<main class="wrap lesson-body">
+
+  <section>
+    <h2>Three habits that change everything</h2>
+    <p><strong>Give it real material, not a description of it.</strong> Instead of describing a document from memory, paste the actual document in. AI answers about a summary of a thing are worse than answers about the thing itself.</p>
+    <p><strong>Ask for structured output when you'll reuse the answer.</strong> If you're going to copy the result into a spreadsheet, a script, or another tool, ask for a table or JSON instead of a paragraph. It costs nothing to ask and saves you the reformatting.</p>
+    <p><strong>Start a new chat for a new task.</strong> Every message you send re-sends the whole conversation so far. A long thread doesn't just get slower, older details get harder for the model to weigh against everything said since. A fresh chat with the relevant context pasted back in often outperforms a 40-message thread.</p>
+  </section>
+
+  <section>
+    <h2>Same question, two shapes of answer</h2>
+    <p>Toggle between asking for prose and asking for structure. Same underlying information, very different usefulness depending on what you're about to do with it.</p>
+
+    <div class="slider-row">
+      <span style="font-size:0.85rem; color:var(--text-faint);">📝 Prose</span>
+      <input type="range" min="0" max="1" step="1" value="0" id="structSlider" oninput="updateStructDemo(this.value)">
+      <span style="font-size:0.85rem; color:var(--text-faint);">📊 Structured</span>
+    </div>
+
+    <div class="card">
+      <p style="font-size:0.85rem; color:var(--text-faint); margin:0 0 10px;">Prompt: "Here are my March expenses: rent 1200, groceries 340, transport 90, one subscription refund of -15. Summarize this."</p>
+      <div id="structOutput" style="font-family:var(--font-mono); font-size:0.88rem; color:var(--text);">
+        In March, your largest expense was rent at 1200, followed by groceries at 340 and transport at 90. You also received a small refund of 15 from a subscription, bringing your total spend to around 1615.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Quick check</h2>
+    <div class="quiz" id="quizL2a">
+      <p style="margin-top:0; font-weight:600; color:var(--text);">Why can a very long AI conversation start giving worse answers?</p>
+      <button class="quiz-opt" data-correct="false">The model literally runs out of words it's allowed to say</button>
+      <button class="quiz-opt" data-correct="true">Older details get crowded out by everything said since, making them harder to weigh correctly</button>
+      <button class="quiz-opt" data-correct="false">It needs to restart itself automatically after 50 messages</button>
+      <div class="quiz-feedback" id="quizL2a-feedback"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="callout real">
+      <span class="callout-label">🎯 Try it for real</span>
+      <p>Paste a real document into a chatbot, a bill, a policy excerpt, meeting notes, and ask it to pull out specific fields as a table. Compare that to just asking "what does this say" in plain prose.</p>
+      <a href="https://claude.ai" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Open Claude →</a>
+    </div>
+  </section>
+
+  <div style="text-align:center; margin-top:20px;">
+    <button class="btn btn-primary" onclick="markLessonComplete()">Mark lesson complete ✓</button>
+    <p id="complete-marker" style="margin-top:10px; color:var(--accent-3); font-size:0.9rem;"></p>
+    <p style="margin-top:14px; font-size:0.82rem; color:var(--text-faint);">Stuck or confused on this lesson? <a href="mailto:shayshankr@gmail.com?subject=Learn%20AI%20-%20L2%20Lesson%201%20feedback">Email me</a> or <a href="https://github.com/shayshankr/learn-ai/issues/new" target="_blank" rel="noopener">open an issue</a>.</p>
+  </div>
+
+  <div class="lesson-nav-footer">
+    <a href="09-build-something-real.html" class="nav-card"><small>Previous</small><span>← Build Something Real</span></a>
+    <a href="l2-02-connect-your-tools.html" class="nav-card next"><small>Next lesson</small><span>Connecting Your Tools →</span></a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Built by <a href="https://github.com/shayshankr" target="_blank" rel="noopener">Shayshank Rathore</a>, with Claude.</p>
+    <p style="margin-top:8px;"><button class="reset-link" onclick="resetProgress()">Reset my progress</button></p>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+<script>
+  function updateStructDemo(v) {
+    const el = document.getElementById('structOutput');
+    if (v === '0') {
+      el.textContent = "In March, your largest expense was rent at 1200, followed by groceries at 340 and transport at 90. You also received a small refund of 15 from a subscription, bringing your total spend to around 1615.";
+    } else {
+      el.innerHTML = "| Item | Amount |\n|---|---|\n| Rent | 1200 |\n| Groceries | 340 |\n| Transport | 90 |\n| Subscription refund | -15 |\n| **Total** | **1615** |".replace(/\n/g, '<br>');
+    }
+  }
+
+  document.querySelectorAll('#quizL2a .quiz-opt').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const quiz = document.getElementById('quizL2a');
+      const fb = document.getElementById('quizL2a-feedback');
+      quiz.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
+      if (btn.dataset.correct === 'true') {
+        btn.classList.add('correct');
+        fb.textContent = '✓ Right — the model isn\'t "running out" of anything, it just has more competing context to weigh.';
+      } else {
+        btn.classList.add('wrong');
+        quiz.querySelector('[data-correct="true"]').classList.add('correct');
+        fb.textContent = 'Not quite — the correct answer is highlighted above.';
+      }
+      fb.classList.add('show');
+    });
+  });
+</script>
+</body>
+</html>

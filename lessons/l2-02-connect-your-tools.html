@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connecting AI to Your Real Tools — Learn AI</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-lesson="l2-connect">
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="../index.html" class="brand"><span class="logo-dot">🤖</span> Learn AI</a>
+    <div class="nav-links">
+      <a href="../index.html">Course</a>
+      <a href="#" class="active">Level 2 · 2</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
+    </div>
+  </div>
+</nav>
+
+<header class="wrap lesson-hero">
+  <div class="lesson-meta">
+    <span class="pill level2">Level 2 · Lesson 2</span>
+    <span style="color:var(--text-faint); font-size:0.85rem;">9 min read</span>
+  </div>
+  <h1>Connecting AI to Your Real Tools</h1>
+  <p style="font-size:1.1rem; max-width:640px;">Copy-pasting into a chat window is fine, but it's not the ceiling. AI that's actually connected to your calendar, inbox, or docs can check things instead of being told them.</p>
+</header>
+
+<main class="wrap lesson-body">
+
+  <section>
+    <h2>What "connected" actually means</h2>
+    <p><strong>MCP (Model Context Protocol)</strong> is an open standard that lets an AI plug into an app, like Gmail, a calendar, GitHub, or Slack, so it can read from or act on your real data instead of only the text you paste in. Claude connected to your calendar can actually check whether you're free Thursday. Claude without it can only work from what you type.</p>
+    <p>Lesson 6 showed a scripted workflow diagram. This is the same idea, for real: <strong>trigger → AI step → action</strong>, except now each block is a genuine connection to an app you use.</p>
+  </section>
+
+  <section>
+    <h2>Build a real-tool chain</h2>
+    <p>Click blocks to connect real tools into a chain, the way you'd wire it up in Zapier, n8n, or an MCP-enabled assistant.</p>
+
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;">
+      <button class="btn btn-ghost btn-sm" onclick="addTool('📧','Gmail: new email arrives')">📧 Gmail</button>
+      <button class="btn btn-ghost btn-sm" onclick="addTool('🤖','AI: draft a reply')">🤖 AI step</button>
+      <button class="btn btn-ghost btn-sm" onclick="addTool('📅','Calendar: check availability')">📅 Calendar</button>
+      <button class="btn btn-ghost btn-sm" onclick="addTool('💬','Slack: post summary')">💬 Slack</button>
+      <button class="btn btn-ghost btn-sm" onclick="addTool('📋','Notion: log the result')">📋 Notion</button>
+    </div>
+
+    <div class="card" style="min-height:100px;">
+      <div id="toolChain" style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; color:var(--text-faint); font-size:0.9rem;">
+        Click tools above to build your chain →
+      </div>
+      <button class="btn btn-ghost btn-sm" style="margin-top:16px;" onclick="resetToolChain()">Reset</button>
+    </div>
+  </section>
+
+  <section>
+    <div class="callout warn">
+      <span class="callout-label">⚠️ Start read-only</span>
+      <p>The first time you connect a new tool, give it permission to read before you give it permission to write or delete. Review what it's about to send, post, or remove before you approve it, especially the first few times. Most good integrations ask before anything irreversible; be wary of any that don't.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="callout real">
+      <span class="callout-label">🎯 Try it for real</span>
+      <p>Connect one real integration this week, Claude or ChatGPT to your calendar, or a single Zapier automation with a real AI step in it. Start with something read-only, like "summarize my week."</p>
+      <a href="https://claude.com/product/claude-code" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Claude + tools →</a>
+    </div>
+  </section>
+
+  <div style="text-align:center; margin-top:20px;">
+    <button class="btn btn-primary" onclick="markLessonComplete()">Mark lesson complete ✓</button>
+    <p id="complete-marker" style="margin-top:10px; color:var(--accent-3); font-size:0.9rem;"></p>
+    <p style="margin-top:14px; font-size:0.82rem; color:var(--text-faint);">Stuck or confused on this lesson? <a href="mailto:shayshankr@gmail.com?subject=Learn%20AI%20-%20L2%20Lesson%202%20feedback">Email me</a> or <a href="https://github.com/shayshankr/learn-ai/issues/new" target="_blank" rel="noopener">open an issue</a>.</p>
+  </div>
+
+  <div class="lesson-nav-footer">
+    <a href="l2-01-better-context.html" class="nav-card"><small>Previous</small><span>← Better Context, Better Output</span></a>
+    <a href="l2-03-real-automation.html" class="nav-card next"><small>Next lesson</small><span>A Real Automation →</span></a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Built by <a href="https://github.com/shayshankr" target="_blank" rel="noopener">Shayshank Rathore</a>, with Claude.</p>
+    <p style="margin-top:8px;"><button class="reset-link" onclick="resetProgress()">Reset my progress</button></p>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+<script>
+  function addTool(icon, label) {
+    const chain = document.getElementById('toolChain');
+    if (chain.dataset.count === undefined) { chain.dataset.count = '0'; chain.innerHTML = ''; }
+    const count = parseInt(chain.dataset.count);
+    if (count > 0) {
+      const arrow = document.createElement('span');
+      arrow.textContent = '→';
+      arrow.style.color = 'var(--accent)';
+      chain.appendChild(arrow);
+    }
+    const block = document.createElement('span');
+    block.style.cssText = 'background:var(--panel-2); border:1px solid var(--border); border-radius:10px; padding:8px 14px; font-size:0.88rem; color:var(--text);';
+    block.textContent = icon + ' ' + label;
+    chain.appendChild(block);
+    chain.dataset.count = String(count + 1);
+  }
+  function resetToolChain() {
+    const chain = document.getElementById('toolChain');
+    chain.dataset.count = '0';
+    chain.innerHTML = 'Click tools above to build your chain →';
+  }
+</script>
+</body>
+</html>

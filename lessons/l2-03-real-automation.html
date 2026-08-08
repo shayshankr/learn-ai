@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Real Automation, End to End — Learn AI</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-lesson="l2-automation">
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="../index.html" class="brand"><span class="logo-dot">🤖</span> Learn AI</a>
+    <div class="nav-links">
+      <a href="../index.html">Course</a>
+      <a href="#" class="active">Level 2 · 3</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
+    </div>
+  </div>
+</nav>
+
+<header class="wrap lesson-hero">
+  <div class="lesson-meta">
+    <span class="pill level2">Level 2 · Lesson 3</span>
+    <span style="color:var(--text-faint); font-size:0.85rem;">~60 min, hands-on</span>
+  </div>
+  <h1>A Real Automation, End to End</h1>
+  <p style="font-size:1.1rem; max-width:640px;">This is Lesson 9 for people who don't want to write code. Same idea: pick something you actually do by hand, and turn it into an automation you can turn on this week.</p>
+</header>
+
+<main class="wrap lesson-body">
+
+  <section>
+    <h2>Pick a real one</h2>
+    <p>Click one to see the brief and a starter description you can paste into Zapier, n8n, or Make's AI step.</p>
+
+    <div style="display:flex; gap:8px; flex-wrap:wrap; margin:16px 0;">
+      <button class="btn btn-ghost btn-sm" onclick="setAuto(0)">📥 Auto-sort my inbox</button>
+      <button class="btn btn-ghost btn-sm" onclick="setAuto(1)">📝 Auto-summarize meeting notes</button>
+      <button class="btn btn-ghost btn-sm" onclick="setAuto(2)">📣 Auto-post a weekly digest</button>
+      <button class="btn btn-ghost btn-sm" onclick="setAuto(3)">🧾 Auto-flag invoices that need action</button>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;" id="autoTitle">Auto-sort my inbox</h3>
+      <p id="autoBrief">A new email arrives, an AI step reads it and decides which folder or label it belongs in, so your inbox sorts itself instead of you doing it every morning.</p>
+      <div class="callout tip" style="margin:16px 0 0;">
+        <span class="callout-label">📋 Starter description</span>
+        <p id="autoPrompt" style="font-family:var(--font-mono); font-size:0.85rem;">When a new email arrives, read the subject and first paragraph, decide if it's Urgent, Newsletter, or Needs Reply, and apply the matching label. If unsure, leave it in the inbox untouched.</p>
+      </div>
+      <button class="btn btn-ghost btn-sm" style="margin-top:12px;" onclick="copyAutoPrompt()">Copy description</button>
+      <span id="autoCopyFeedback" style="font-size:0.85rem; color:var(--accent-3); margin-left:10px;"></span>
+    </div>
+  </section>
+
+  <section>
+    <h2>The shape, recapped</h2>
+    <p>Trigger, then an AI step to make a judgment call, then an action. That's it, that's the whole pattern from Lesson 6, just pointed at something real.</p>
+    <div class="tool-compare">
+      <div class="tool-card"><span class="icon">⚡</span><h4>Trigger</h4><p style="font-size:0.85rem; margin:0;">The event that starts it: new email, new form response, a scheduled time.</p></div>
+      <div class="tool-card"><span class="icon">🤖</span><h4>AI step</h4><p style="font-size:0.85rem; margin:0;">The judgment call a fixed rule can't make well: is this urgent? What's the summary?</p></div>
+      <div class="tool-card"><span class="icon">✅</span><h4>Action</h4><p style="font-size:0.85rem; margin:0;">What actually happens: a label applied, a message sent, a row added.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="callout real">
+      <span class="callout-label">🎯 Try it for real</span>
+      <p>Give yourself 60 minutes this week. Pick one idea above, build it in Zapier, n8n, or Make's free tier, and actually turn it on.</p>
+      <a href="mailto:shayshankr@gmail.com?subject=Learn%20AI%20-%20I%20built%20an%20automation" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Tell me what you built →</a>
+    </div>
+  </section>
+
+  <div style="text-align:center; margin-top:20px;">
+    <button class="btn btn-primary" onclick="markLessonComplete()">Mark lesson complete ✓</button>
+    <p id="complete-marker" style="margin-top:10px; color:var(--accent-3); font-size:0.9rem;"></p>
+    <p style="margin-top:14px; font-size:0.82rem; color:var(--text-faint);">Stuck or confused on this lesson? <a href="mailto:shayshankr@gmail.com?subject=Learn%20AI%20-%20L2%20Lesson%203%20feedback">Email me</a> or <a href="https://github.com/shayshankr/learn-ai/issues/new" target="_blank" rel="noopener">open an issue</a>.</p>
+  </div>
+
+  <div class="lesson-nav-footer">
+    <a href="l2-02-connect-your-tools.html" class="nav-card"><small>Previous</small><span>← Connecting Your Tools</span></a>
+    <a href="l2-04-agents-on-real-work.html" class="nav-card next"><small>Next lesson</small><span>Agents on Real Work →</span></a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Built by <a href="https://github.com/shayshankr" target="_blank" rel="noopener">Shayshank Rathore</a>, with Claude.</p>
+    <p style="margin-top:8px;"><button class="reset-link" onclick="resetProgress()">Reset my progress</button></p>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+<script>
+  const autos = [
+    { title: 'Auto-sort my inbox', brief: 'A new email arrives, an AI step reads it and decides which folder or label it belongs in, so your inbox sorts itself instead of you doing it every morning.', prompt: "When a new email arrives, read the subject and first paragraph, decide if it's Urgent, Newsletter, or Needs Reply, and apply the matching label. If unsure, leave it in the inbox untouched." },
+    { title: 'Auto-summarize meeting notes', brief: 'After a meeting, an AI step turns your raw notes into a short summary and emails it to attendees automatically.', prompt: 'When a new note is added to this folder, summarize it into three sections: decisions made, action items with owners, and open questions. Email the summary to the attendee list.' },
+    { title: 'Auto-post a weekly digest', brief: 'Every Friday, an AI step gathers what happened this week from a doc or channel and posts a short digest.', prompt: 'Every Friday at 4pm, read this week\'s entries in the log, write a 5-bullet digest of what happened, and post it to the team channel.' },
+    { title: 'Auto-flag invoices that need action', brief: 'A new invoice comes in, an AI step checks it against a few rules and flags the ones that actually need a human to look.', prompt: 'When a new invoice arrives, check the due date and amount. If the amount is over 500 or the due date is within 5 days, flag it as Needs Review and notify me. Otherwise file it as Routine.' }
+  ];
+
+  function setAuto(i) {
+    document.getElementById('autoTitle').textContent = autos[i].title;
+    document.getElementById('autoBrief').textContent = autos[i].brief;
+    document.getElementById('autoPrompt').textContent = autos[i].prompt;
+    document.getElementById('autoCopyFeedback').textContent = '';
+  }
+
+  function copyAutoPrompt() {
+    const text = document.getElementById('autoPrompt').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      document.getElementById('autoCopyFeedback').textContent = '✓ copied';
+      setTimeout(() => document.getElementById('autoCopyFeedback').textContent = '', 1500);
+    }).catch(() => {
+      document.getElementById('autoCopyFeedback').textContent = 'select the text above to copy';
+    });
+  }
+</script>
+</body>
+</html>

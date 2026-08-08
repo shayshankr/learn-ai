@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agents on Real Work — Learn AI</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-lesson="l2-agents">
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="../index.html" class="brand"><span class="logo-dot">🤖</span> Learn AI</a>
+    <div class="nav-links">
+      <a href="../index.html">Course</a>
+      <a href="#" class="active">Level 2 · 4</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
+    </div>
+  </div>
+</nav>
+
+<header class="wrap lesson-hero">
+  <div class="lesson-meta">
+    <span class="pill level2">Level 2 · Lesson 4</span>
+    <span style="color:var(--text-faint); font-size:0.85rem;">10 min read</span>
+  </div>
+  <h1>Agents on Real Work</h1>
+  <p style="font-size:1.1rem; max-width:640px;">Lesson 7 showed you the think → act → observe loop on a toy example. This is the same loop on something that actually matters, and the one habit that keeps it safe.</p>
+</header>
+
+<main class="wrap lesson-body">
+
+  <section>
+    <h2>Bigger tasks, same loop</h2>
+    <p>A coding agent working across a real, multi-file project isn't doing anything conceptually different from the weather-and-picnic example in Lesson 7. It's just running that loop more times, on higher-stakes ground: editing real files, running real commands, sometimes touching real accounts.</p>
+    <p>The one thing that changes is what "observe" needs to include: not just "did that work," but "was that safe to do without asking first."</p>
+  </section>
+
+  <section>
+    <h2>Try the checkpoint yourself</h2>
+    <p>An agent is about to take an action. Decide: does it need your approval first, or is it fine to just go?</p>
+
+    <div class="card" id="checkpointCard">
+      <p style="margin-top:0; font-size:0.85rem; color:var(--text-faint);">Action queued:</p>
+      <p id="checkpointAction" style="font-weight:600; color:var(--text); font-size:1.05rem;">Delete the file <code>old_config.json</code></p>
+      <div style="display:flex; gap:10px; margin-top:16px;">
+        <button class="btn btn-primary btn-sm" onclick="checkpointDecide(true)">✓ Approve</button>
+        <button class="btn btn-ghost btn-sm" onclick="checkpointDecide(false)">✕ Deny</button>
+      </div>
+      <p id="checkpointFeedback" style="margin-top:14px; font-size:0.9rem;"></p>
+      <button class="btn btn-ghost btn-sm" id="checkpointNext" style="display:none; margin-top:10px;" onclick="nextCheckpoint()">Next action →</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Quick check</h2>
+    <div class="quiz" id="quizL2d">
+      <p style="margin-top:0; font-weight:600; color:var(--text);">Which of these should an agent basically always pause and confirm with you first?</p>
+      <button class="quiz-opt" data-correct="false">Reading a public webpage</button>
+      <button class="quiz-opt" data-correct="false">Listing the files in a folder</button>
+      <button class="quiz-opt" data-correct="true">Sending money or deleting something you didn't explicitly ask it to remove</button>
+      <div class="quiz-feedback" id="quizL2d-feedback"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="callout real">
+      <span class="callout-label">🎯 Try it for real</span>
+      <p>Give a real agent, Claude Code, Cursor Agent, or a browser agent, one genuine multi-step task on something you actually own. Watch it work, and approve anything irreversible yourself before it happens.</p>
+      <a href="https://claude.com/product/claude-code" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Claude Code →</a>
+    </div>
+  </section>
+
+  <div style="text-align:center; margin-top:20px;">
+    <button class="btn btn-primary" onclick="markLessonComplete()">Mark lesson complete ✓</button>
+    <p id="complete-marker" style="margin-top:10px; color:var(--accent-3); font-size:0.9rem;"></p>
+    <p style="margin-top:14px; font-size:0.82rem; color:var(--text-faint);">Stuck or confused on this lesson? <a href="mailto:shayshankr@gmail.com?subject=Learn%20AI%20-%20L2%20Lesson%204%20feedback">Email me</a> or <a href="https://github.com/shayshankr/learn-ai/issues/new" target="_blank" rel="noopener">open an issue</a>.</p>
+  </div>
+
+  <div class="lesson-nav-footer">
+    <a href="l2-03-real-automation.html" class="nav-card"><small>Previous</small><span>← A Real Automation</span></a>
+    <a href="l2-05-evaluate-like-a-pro.html" class="nav-card next"><small>Next lesson</small><span>Evaluate Like a Pro →</span></a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Built by <a href="https://github.com/shayshankr" target="_blank" rel="noopener">Shayshank Rathore</a>, with Claude.</p>
+    <p style="margin-top:8px;"><button class="reset-link" onclick="resetProgress()">Reset my progress</button></p>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+<script>
+  const checkpoints = [
+    { action: 'Delete the file <code>old_config.json</code>', needsApproval: true, explainYes: "Right call. Deleting something is hard to undo, and you never explicitly asked for this file to go.", explainNo: "This one was actually worth a pause: deleting a file is hard to reverse, and it wasn't something you'd explicitly asked for." },
+    { action: 'Read the contents of <code>README.md</code>', needsApproval: false, explainYes: "Reading a file doesn't change anything, this was safe to just let happen. No harm in the pause, but not necessary.", explainNo: "Good call, reading a file is harmless and reversible, no approval needed." },
+    { action: 'Send an email to your entire contact list', needsApproval: true, explainYes: "Exactly right. Sending something to a lot of people at once is exactly the kind of action that deserves a second look first.", explainNo: "This one needed a pause, sending to your whole contact list is hard to take back once it's out." },
+    { action: 'Rename a variable inside a file you asked it to refactor', needsApproval: false, explainYes: "This was within what you actually asked for and is easy to undo, approving is fine but not strictly required.", explainNo: "Good instinct, this is exactly the kind of in-scope, reversible change that doesn't need a stop-and-ask." }
+  ];
+  let cpIndex = 0;
+
+  function checkpointDecide(approved) {
+    const cp = checkpoints[cpIndex];
+    const fb = document.getElementById('checkpointFeedback');
+    const correct = approved === cp.needsApproval;
+    fb.style.color = correct ? 'var(--accent-3)' : 'var(--accent-4)';
+    fb.textContent = (approved ? cp.explainYes : cp.explainNo);
+    document.querySelectorAll('#checkpointCard .btn').forEach(b => b.disabled = true);
+    document.getElementById('checkpointNext').style.display = 'inline-flex';
+  }
+
+  function nextCheckpoint() {
+    cpIndex = (cpIndex + 1) % checkpoints.length;
+    document.getElementById('checkpointAction').innerHTML = checkpoints[cpIndex].action;
+    document.getElementById('checkpointFeedback').textContent = '';
+    document.getElementById('checkpointNext').style.display = 'none';
+    document.querySelectorAll('#checkpointCard .btn').forEach(b => b.disabled = false);
+  }
+
+  document.querySelectorAll('#quizL2d .quiz-opt').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const quiz = document.getElementById('quizL2d');
+      const fb = document.getElementById('quizL2d-feedback');
+      quiz.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
+      if (btn.dataset.correct === 'true') {
+        btn.classList.add('correct');
+        fb.textContent = '✓ Right — reading and listing are harmless and reversible. Money and unrequested deletions are not.';
+      } else {
+        btn.classList.add('wrong');
+        quiz.querySelector('[data-correct="true"]').classList.add('correct');
+        fb.textContent = 'Not quite — the correct answer is highlighted above.';
+      }
+      fb.classList.add('show');
+    });
+  });
+</script>
+</body>
+</html>

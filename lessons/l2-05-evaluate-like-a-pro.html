@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evaluate AI Output Like a Pro — Learn AI</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-lesson="l2-evaluate">
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="../index.html" class="brand"><span class="logo-dot">🤖</span> Learn AI</a>
+    <div class="nav-links">
+      <a href="../index.html">Course</a>
+      <a href="#" class="active">Level 2 · 5</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
+    </div>
+  </div>
+</nav>
+
+<header class="wrap lesson-hero">
+  <div class="lesson-meta">
+    <span class="pill level2">Level 2 · Lesson 5 · Final</span>
+    <span style="color:var(--text-faint); font-size:0.85rem;">9 min read</span>
+  </div>
+  <h1>Evaluate AI Output Like a Pro</h1>
+  <p style="font-size:1.1rem; max-width:640px;">Lesson 8 taught you that hallucinations exist. This is the actual checklist for catching them, the same one worth running on anything you're about to rely on.</p>
+</header>
+
+<main class="wrap lesson-body">
+
+  <section>
+    <h2>The five-point checklist</h2>
+    <div class="tool-compare">
+      <div class="tool-card"><span class="icon">🔗</span><h4>Source it</h4><p style="font-size:0.85rem; margin:0;">Can you find where this claim comes from, independently of the AI that said it?</p></div>
+      <div class="tool-card"><span class="icon">🔀</span><h4>Cross-check it</h4><p style="font-size:0.85rem; margin:0;">Ask a second model the same question. Disagreement is a signal to dig further.</p></div>
+      <div class="tool-card"><span class="icon">🧪</span><h4>Test the edge</h4><p style="font-size:0.85rem; margin:0;">Does an "always true" rule survive an obvious exception you can think of?</p></div>
+      <div class="tool-card"><span class="icon">🔢</span><h4>Check the math</h4><p style="font-size:0.85rem; margin:0;">Re-derive any specific number yourself instead of trusting the total.</p></div>
+      <div class="tool-card"><span class="icon">✨</span><h4>Reread the confident part</h4><p style="font-size:0.85rem; margin:0;">The smoothest-sounding sentence is often the one most worth double-checking.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Score yourself: three claims</h2>
+    <p>Run the checklist mentally on each one. Pick fabricated or real.</p>
+
+    <div class="quiz" id="quizScored">
+      <p style="margin-top:0; font-weight:600; color:var(--text);" id="scoreQText">1 / 3 — "The Great Wall of China is visible from space with the naked eye."</p>
+      <button class="quiz-opt" data-val="fake">Fabricated / false</button>
+      <button class="quiz-opt" data-val="real">Real / true</button>
+      <div class="quiz-feedback" id="scoreFeedback"></div>
+      <button class="btn btn-ghost btn-sm" id="scoreNextBtn" style="display:none; margin-top:12px;" onclick="nextScoredQ()">Next →</button>
+    </div>
+    <p id="finalScore" style="margin-top:14px; font-weight:600; color:var(--accent-3); display:none;"></p>
+  </section>
+
+  <section>
+    <div class="callout real">
+      <span class="callout-label">🎯 Try it for real</span>
+      <p>Next time an AI hands you a surprising or specific claim, run the five-point checklist on it once, for real, before you repeat it to anyone.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="callout" style="border-color:var(--accent-4);">
+      <span class="callout-label">🎓 That's both levels done</span>
+      <p style="margin:0;">Nine core lessons and five more on top. If you've made it here, you know more about actually using these tools than most people who use them daily, and you've shipped at least one real thing along the way.</p>
+    </div>
+  </section>
+
+  <div style="text-align:center; margin-top:20px;">
+    <button class="btn btn-primary" onclick="markLessonComplete()">Mark lesson complete ✓</button>
+    <p id="complete-marker" style="margin-top:10px; color:var(--accent-3); font-size:0.9rem;"></p>
+    <p style="margin-top:14px; font-size:0.82rem; color:var(--text-faint);">Stuck or confused on this lesson? <a href="mailto:shayshankr@gmail.com?subject=Learn%20AI%20-%20L2%20Lesson%205%20feedback">Email me</a> or <a href="https://github.com/shayshankr/learn-ai/issues/new" target="_blank" rel="noopener">open an issue</a>.</p>
+  </div>
+
+  <div class="lesson-nav-footer">
+    <a href="l2-04-agents-on-real-work.html" class="nav-card"><small>Previous</small><span>← Agents on Real Work</span></a>
+    <a href="../index.html" class="nav-card next"><small>Finished!</small><span>Back to course map →</span></a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Built by <a href="https://github.com/shayshankr" target="_blank" rel="noopener">Shayshank Rathore</a>, with Claude.</p>
+    <p style="margin-top:8px;"><button class="reset-link" onclick="resetProgress()">Reset my progress</button></p>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+<script>
+  const scoredQs = [
+    { text: '1 / 3 — "The Great Wall of China is visible from space with the naked eye."', answer: 'fake', explain: "Fabricated. It's a persistent myth, astronauts have confirmed it's not distinguishable without aid from low orbit." },
+    { text: '2 / 3 — "Water boils at a lower temperature at higher altitudes."', answer: 'real', explain: "Real. Lower atmospheric pressure at altitude means water boils below 100°C." },
+    { text: '3 / 3 — "A 2019 Stanford study found 73% of remote workers check email before 6am."', answer: 'fake', explain: 'Fabricated. Oddly specific stat plus a vague citation is exactly the pattern to be suspicious of.' }
+  ];
+  let sqIndex = 0, sqScore = 0;
+
+  document.querySelectorAll('#quizScored .quiz-opt').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const q = scoredQs[sqIndex];
+      const fb = document.getElementById('scoreFeedback');
+      document.querySelectorAll('#quizScored .quiz-opt').forEach(b => b.disabled = true);
+      const correct = btn.dataset.val === q.answer;
+      if (correct) { btn.classList.add('correct'); sqScore++; }
+      else {
+        btn.classList.add('wrong');
+        document.querySelector(`#quizScored [data-val="${q.answer}"]`).classList.add('correct');
+      }
+      fb.textContent = (correct ? '✓ ' : '✗ ') + q.explain;
+      fb.classList.add('show');
+      document.getElementById('scoreNextBtn').style.display = 'inline-flex';
+      document.getElementById('scoreNextBtn').textContent = sqIndex < scoredQs.length - 1 ? 'Next →' : 'See my score →';
+    });
+  });
+
+  function nextScoredQ() {
+    sqIndex++;
+    const fb = document.getElementById('scoreFeedback');
+    fb.classList.remove('show');
+    document.getElementById('scoreNextBtn').style.display = 'none';
+    if (sqIndex >= scoredQs.length) {
+      document.getElementById('quizScored').style.display = 'none';
+      const final = document.getElementById('finalScore');
+      final.style.display = 'block';
+      final.textContent = `You caught ${sqScore} / ${scoredQs.length}. ` + (sqScore === scoredQs.length ? "Full marks, the checklist is second nature already." : "Worth running the actual checklist next time something surprises you.");
+      return;
+    }
+    document.getElementById('scoreQText').textContent = scoredQs[sqIndex].text;
+    document.querySelectorAll('#quizScored .quiz-opt').forEach(b => { b.disabled = false; b.classList.remove('correct','wrong'); });
+  }
+</script>
+</body>
+</html>

@@ -18,6 +18,14 @@ Built for a friend who wanted to learn AI, and for anyone else who lands here. N
 8. [Using AI Responsibly](lessons/08-using-ai-responsibly.html)
 9. [Build Something Real](lessons/09-build-something-real.html) — capstone project
 
+**Level 2 — going deeper** (for people who finish the core 9):
+
+1. [Better Context, Better Output](lessons/l2-01-better-context.html)
+2. [Connecting AI to Your Real Tools](lessons/l2-02-connect-your-tools.html)
+3. [A Real Automation, End to End](lessons/l2-03-real-automation.html)
+4. [Agents on Real Work](lessons/l2-04-agents-on-real-work.html)
+5. [Evaluate AI Output Like a Pro](lessons/l2-05-evaluate-like-a-pro.html)
+
 ## Running locally
 
 No build step — it's static HTML/CSS/JS. Serve the folder with any static server, e.g.:

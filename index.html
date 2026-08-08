@@ -121,6 +121,56 @@
     </a>
 
   </div>
+
+  <div class="section-divider"><hr><span>Level 2 · Going deeper</span><hr></div>
+  <p>Finished the core 9? These five turn "using AI tools" into building, connecting, and automating real things. Same format, no sign-up needed to keep going.</p>
+
+  <div style="margin-top:20px; max-width:420px;">
+    <div style="display:flex; justify-content:space-between; font-size:0.82rem; color:var(--text-faint); margin-bottom:8px;">
+      <span>Level 2 progress</span>
+      <span id="l2-progress-label">0 / 5 lessons</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="l2-progress-fill" style="width:0%; background:var(--grad-warm);"></div></div>
+  </div>
+
+  <div class="lesson-grid" style="margin-top:24px;">
+
+    <a class="lesson-card" data-id="l2-context" href="lessons/l2-01-better-context.html">
+      <span class="done-badge">✓</span>
+      <span class="num">L2 · 1 · 10 min</span>
+      <h3>Better Context, Better Output</h3>
+      <p>System prompts, structured output, and why long chats quietly get worse. Try a prose-vs-structured toggle.</p>
+    </a>
+
+    <a class="lesson-card" data-id="l2-connect" href="lessons/l2-02-connect-your-tools.html">
+      <span class="done-badge">✓</span>
+      <span class="num">L2 · 2 · 9 min</span>
+      <h3>Connecting AI to Your Real Tools</h3>
+      <p>MCP, real integrations, and starting read-only. Build a real-tool chain in the demo.</p>
+    </a>
+
+    <a class="lesson-card" data-id="l2-automation" href="lessons/l2-03-real-automation.html">
+      <span class="done-badge">✓</span>
+      <span class="num">L2 · 3 · ~60 min</span>
+      <h3>A Real Automation, End to End</h3>
+      <p>Lesson 9 for non-coders: pick a real repetitive task and actually automate it this week.</p>
+    </a>
+
+    <a class="lesson-card" data-id="l2-agents" href="lessons/l2-04-agents-on-real-work.html">
+      <span class="done-badge">✓</span>
+      <span class="num">L2 · 4 · 10 min</span>
+      <h3>Agents on Real Work</h3>
+      <p>The Lesson 7 loop, on real work. Try the interactive checkpoint: approve or deny what the agent wants to do.</p>
+    </a>
+
+    <a class="lesson-card" data-id="l2-evaluate" href="lessons/l2-05-evaluate-like-a-pro.html">
+      <span class="done-badge">✓</span>
+      <span class="num">L2 · 5 · 9 min</span>
+      <h3>Evaluate AI Output Like a Pro</h3>
+      <p>The five-point checklist, then a scored round: can you catch which claims are fabricated?</p>
+    </a>
+
+  </div>
 </main>
 
 <footer class="site-footer">
@@ -134,13 +184,16 @@
 <script src="assets/js/main.js"></script>
 <script>
   (function () {
-    const total = 9;
-    const progress = window.getProgress ? window.getProgress() : {};
+    const coreIds = ['what-is-ai','chatbots-101','prompt-engineering','coding-assistants','image-video-gen','no-code-builders','ai-agents','using-ai-responsibly','build-something-real'];
+    const l2Ids = ['l2-context','l2-connect','l2-automation','l2-agents','l2-evaluate'];
     function paint() {
       const p = JSON.parse(localStorage.getItem('learnai-progress') || '{}');
-      const count = Object.values(p).filter(Boolean).length;
-      document.getElementById('progress-label').textContent = count + ' / ' + total + ' lessons';
-      document.getElementById('progress-fill').style.width = (count / total * 100) + '%';
+      const coreCount = coreIds.filter(id => p[id]).length;
+      const l2Count = l2Ids.filter(id => p[id]).length;
+      document.getElementById('progress-label').textContent = coreCount + ' / ' + coreIds.length + ' lessons';
+      document.getElementById('progress-fill').style.width = (coreCount / coreIds.length * 100) + '%';
+      document.getElementById('l2-progress-label').textContent = l2Count + ' / ' + l2Ids.length + ' lessons';
+      document.getElementById('l2-progress-fill').style.width = (l2Count / l2Ids.length * 100) + '%';
       document.querySelectorAll('.lesson-card').forEach(card => {
         if (p[card.dataset.id]) card.classList.add('done');
       });

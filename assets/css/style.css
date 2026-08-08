@@ -119,6 +119,14 @@ code, pre { font-family: var(--font-mono); }
   font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase;
   background: var(--panel-2); color: var(--accent); border: 1px solid var(--border);
 }
+.pill.level2 {
+  color: var(--accent-4);
+  background: color-mix(in srgb, var(--accent-4) 12%, var(--panel-2));
+  border-color: color-mix(in srgb, var(--accent-4) 40%, var(--border));
+}
+.section-divider { display:flex; align-items:center; gap:16px; margin: 64px 0 8px; }
+.section-divider hr { flex:1; border:none; border-top:1px solid var(--border); }
+.section-divider span { font-family: var(--font-display); font-weight:700; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.06em; color: var(--accent-4); white-space:nowrap; }
 
 /* ---- Lesson layout ---- */
 .lesson-hero { padding: 64px 0 32px; }
