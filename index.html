@@ -42,12 +42,34 @@
     <a href="#map" class="btn btn-ghost">See the full course</a>
   </div>
 
-  <div style="margin-top:44px; max-width:420px;">
+  <div class="card" style="margin-top:32px; max-width:560px;">
+    <p style="margin:0 0 12px; font-weight:600; color:var(--text); font-size:0.95rem;">Not sure where to start?</p>
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <a href="lessons/01-what-is-ai.html" class="btn btn-ghost btn-sm" style="justify-content:flex-start; text-align:left;">Never used an AI chatbot before → start at Lesson 1</a>
+      <a href="lessons/04-ai-coding-assistants.html" class="btn btn-ghost btn-sm" style="justify-content:flex-start; text-align:left;">Use ChatGPT or Claude sometimes, haven't built anything → skip to Lesson 4</a>
+      <a href="lessons/l2-01-better-context.html" class="btn btn-ghost btn-sm" style="justify-content:flex-start; text-align:left;">Already built or automated something with AI → jump to Level 2</a>
+    </div>
+  </div>
+
+  <div style="margin-top:32px; max-width:420px;">
     <div style="display:flex; justify-content:space-between; font-size:0.82rem; color:var(--text-faint); margin-bottom:8px;">
       <span>Your progress</span>
-      <span id="progress-label">0 / 8 lessons</span>
+      <span id="progress-label">0 / 9 lessons</span>
     </div>
     <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  </div>
+
+  <div id="completionBadge" style="display:none; margin-top:32px; max-width:640px;">
+    <div class="card" style="border-color:var(--accent-3);">
+      <p style="margin:0 0 4px; font-weight:700; color:var(--text); font-size:1.05rem;">🎓 You finished the whole thing, all 14 lessons.</p>
+      <p style="margin:0 0 16px; font-size:0.9rem;">Here's a badge to keep or share.</p>
+      <canvas id="badgeCanvas" width="1200" height="630" style="width:100%; max-width:520px; border-radius:12px; border:1px solid var(--border); display:block;"></canvas>
+      <div style="display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; align-items:center;">
+        <button class="btn btn-primary btn-sm" onclick="downloadBadge()">Download image</button>
+        <button class="btn btn-ghost btn-sm" onclick="copyBadgeText()">Copy share text</button>
+        <span id="badgeCopyFeedback" style="font-size:0.85rem; color:var(--accent-3);"></span>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -197,9 +219,86 @@
       document.querySelectorAll('.lesson-card').forEach(card => {
         if (p[card.dataset.id]) card.classList.add('done');
       });
+
+      const badgeSection = document.getElementById('completionBadge');
+      if (coreCount === coreIds.length && l2Count === l2Ids.length) {
+        badgeSection.style.display = 'block';
+        drawBadge();
+      } else {
+        badgeSection.style.display = 'none';
+      }
     }
     document.addEventListener('DOMContentLoaded', paint);
   })();
+
+  function roundRectPath(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  function drawBadge() {
+    const canvas = document.getElementById('badgeCanvas');
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+
+    ctx.fillStyle = '#0b0e17';
+    ctx.fillRect(0, 0, W, H);
+
+    function blob(cx, cy, r, hex) {
+      const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+      g.addColorStop(0, hex + '55');
+      g.addColorStop(1, hex + '00');
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    blob(150, 80, 380, '#7c8cff');
+    blob(1080, 200, 340, '#ff7ce0');
+    blob(950, 560, 300, '#4de6c4');
+
+    ctx.fillStyle = '#7c8cff';
+    roundRectPath(ctx, 80, 90, 44, 44, 12);
+    ctx.fill();
+    ctx.fillStyle = '#eef1fb';
+    ctx.font = '700 30px "Segoe UI", sans-serif';
+    ctx.fillText('Learn AI', 140, 122);
+
+    ctx.font = '700 64px "Segoe UI", sans-serif';
+    ctx.fillText('🎓 Course complete', 78, 280);
+
+    ctx.font = '400 30px "Segoe UI", sans-serif';
+    ctx.fillStyle = '#9aa4c4';
+    ctx.fillText('14 / 14 lessons finished.', 80, 400);
+    ctx.fillText('From "What is AI?" to "Evaluate Like a Pro."', 80, 440);
+
+    ctx.font = '700 26px "Segoe UI", sans-serif';
+    ctx.fillStyle = '#4de6c4';
+    ctx.fillText('shayshankr.github.io/learn-ai', 80, 560);
+  }
+
+  function downloadBadge() {
+    const canvas = document.getElementById('badgeCanvas');
+    const link = document.createElement('a');
+    link.download = 'learn-ai-completion-badge.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }
+
+  function copyBadgeText() {
+    const text = "I just finished Learn AI, a free 14-lesson interactive course on actually using AI tools: https://shayshankr.github.io/learn-ai/";
+    navigator.clipboard.writeText(text).then(() => {
+      document.getElementById('badgeCopyFeedback').textContent = '✓ copied';
+      setTimeout(() => document.getElementById('badgeCopyFeedback').textContent = '', 1500);
+    }).catch(() => {
+      document.getElementById('badgeCopyFeedback').textContent = 'copy failed, select manually';
+    });
+  }
 </script>
 </body>
 </html>
