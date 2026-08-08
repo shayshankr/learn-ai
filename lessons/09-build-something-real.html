@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build Something Real — Learn AI</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-lesson="build-something-real">
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="../index.html" class="brand"><span class="logo-dot">🤖</span> Learn AI</a>
+    <div class="nav-links">
+      <a href="../index.html">Course</a>
+      <a href="#" class="active">Lesson 9</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
+    </div>
+  </div>
+</nav>
+
+<header class="wrap lesson-hero">
+  <div class="lesson-meta">
+    <span class="pill">Lesson 09 · Capstone</span>
+    <span style="color:var(--text-faint); font-size:0.85rem;">~90 min, hands-on</span>
+  </div>
+  <h1>Build Something Real</h1>
+  <p style="font-size:1.1rem; max-width:640px;">Eight lessons of using AI tools. This one is different: pick something small, build it with an AI coding assistant, and put it on the internet.</p>
+</header>
+
+<main class="wrap lesson-body">
+
+  <section>
+    <h2>Pick a project</h2>
+    <p>Nothing ambitious. Something you could finish this week. Click one to see the brief and a starter prompt you can paste straight into Claude Code, Cursor, or Replit.</p>
+
+    <div style="display:flex; gap:8px; flex-wrap:wrap; margin:16px 0;" id="projectButtons">
+      <button class="btn btn-ghost btn-sm" onclick="setProject(0)">📊 A tiny tracker</button>
+      <button class="btn btn-ghost btn-sm" onclick="setProject(1)">📝 A weekly auto-draft</button>
+      <button class="btn btn-ghost btn-sm" onclick="setProject(2)">📄 Explain or roast a document</button>
+      <button class="btn btn-ghost btn-sm" onclick="setProject(3)">🔁 Rebuild a demo from this course</button>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;" id="projTitle">A tiny tracker</h3>
+      <p id="projBrief">A single page that tracks something daily — habits, expenses, mood — saved right in your browser. No backend, no database, no login.</p>
+      <div class="callout tip" style="margin:16px 0 0;">
+        <span class="callout-label">📋 Starter prompt</span>
+        <p id="projPrompt" style="font-family:var(--font-mono); font-size:0.85rem;">Build me a single-page HTML app that lets me log a daily habit (yes/no) with a running streak counter. Store everything in localStorage, no backend. Make it look clean, and show me a preview before we polish it.</p>
+      </div>
+      <button class="btn btn-ghost btn-sm" style="margin-top:12px;" onclick="copyProjectPrompt()">Copy prompt</button>
+      <span id="projCopyFeedback" style="font-size:0.85rem; color:var(--accent-3); margin-left:10px;"></span>
+    </div>
+  </section>
+
+  <section>
+    <h2>The loop you're about to run</h2>
+    <p>This is the same shape as every lesson before this one, except now you're the one doing it, not watching a demo.</p>
+
+    <div class="card">
+      <div id="buildSteps" style="display:flex; flex-direction:column; gap:10px; min-height:210px;"></div>
+      <button class="btn btn-primary btn-sm" onclick="runBuildLoop()" id="buildBtn" style="margin-top:14px;">▶ Walk through the loop</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Ship it somewhere real</h2>
+    <p>A working thing on the internet beats a perfect thing on your laptop. Pick whichever of these feels least intimidating.</p>
+    <div class="tool-compare">
+      <div class="tool-card"><span class="icon">📄</span><h4>Netlify Drop</h4><p style="font-size:0.85rem; margin:0;">Drag your project folder onto netlify.com/drop and get a live URL in seconds. No account, no git. Easiest first deploy.</p></div>
+      <div class="tool-card"><span class="icon">🐙</span><h4>GitHub Pages</h4><p style="font-size:0.85rem; margin:0;">What this course itself runs on. Push to a public repo, flip on Pages in Settings. Best once you're comfortable with git.</p></div>
+      <div class="tool-card"><span class="icon">▶️</span><h4>Replit</h4><p style="font-size:0.85rem; margin:0;">Build and host in the same place. One click to publish if you started the project there already.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="callout warn">
+      <span class="callout-label">⚠️ The most common way this stalls</span>
+      <p>The AI fixes a bug, creates a new one, fixes that, breaks the first one again. If you notice the same error coming back twice, stop asking for another fix. Instead ask it to explain what the code is doing right now, in plain language. If that doesn't unstick things, it's fine to undo the last change and try a more specific prompt instead of pushing forward.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="callout real">
+      <span class="callout-label">🎯 Try it for real</span>
+      <p>Give yourself 90 minutes this week. Pick one idea above, get it running, and deploy it somewhere real, even if it's rough around the edges.</p>
+      <a href="mailto:shayshankr@gmail.com?subject=Learn%20AI%20-%20I%20built%20something" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Tell me what you built →</a>
+    </div>
+  </section>
+
+  <div style="text-align:center; margin-top:20px;">
+    <button class="btn btn-primary" onclick="markLessonComplete()">Mark lesson complete ✓</button>
+    <p id="complete-marker" style="margin-top:10px; color:var(--accent-3); font-size:0.9rem;"></p>
+    <p style="margin-top:14px; font-size:0.82rem; color:var(--text-faint);">Stuck or confused on this lesson? <a href="mailto:shayshankr@gmail.com?subject=Learn%20AI%20-%20Lesson%209%20feedback">Email me</a> or <a href="https://github.com/shayshankr/learn-ai/issues/new" target="_blank" rel="noopener">open an issue</a>.</p>
+  </div>
+
+  <div class="lesson-nav-footer">
+    <a href="08-using-ai-responsibly.html" class="nav-card"><small>Previous</small><span>← Using AI Responsibly</span></a>
+    <a href="../index.html" class="nav-card next"><small>Finished!</small><span>Back to course map →</span></a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Built by <a href="https://github.com/shayshankr" target="_blank" rel="noopener">Shayshank Rathore</a>, with Claude.</p>
+    <p style="margin-top:8px;"><button class="reset-link" onclick="resetProgress()">Reset my progress</button></p>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+<script>
+  const projects = [
+    {
+      title: 'A tiny tracker',
+      brief: 'A single page that tracks something daily — habits, expenses, mood — saved right in your browser. No backend, no database, no login.',
+      prompt: 'Build me a single-page HTML app that lets me log a daily habit (yes/no) with a running streak counter. Store everything in localStorage, no backend. Make it look clean, and show me a preview before we polish it.'
+    },
+    {
+      title: 'A weekly auto-draft',
+      brief: 'Something that reads a few notes you jot during the week and drafts a short summary for you every Friday.',
+      prompt: "Help me build a small app that takes notes I paste in through the week and generates a short weekly summary I can review before sending. Start simple: a text box in, a formatted summary out."
+    },
+    {
+      title: 'Explain or roast a document',
+      brief: 'Paste in an email, resume, or contract clause and get a plain-language explanation, or an honest critique, back.',
+      prompt: "Build me a single-page app with a text box where I paste in a document, like a resume or a contract clause, and a button that sends it to an AI to explain it in plain language. I don't have an API key set up yet, help me figure out the simplest way to wire this up."
+    },
+    {
+      title: 'Rebuild a demo from this course',
+      brief: "Pick any interactive demo from Lessons 1-8, the prompt builder, the quiz, the workflow diagram, and rebuild it yourself from scratch.",
+      prompt: "I want to rebuild a prompt-builder demo: a few dropdowns that assemble a sentence live as you change them. Help me build a simple version of that from scratch in one HTML file."
+    }
+  ];
+
+  function setProject(i) {
+    document.getElementById('projTitle').textContent = projects[i].title;
+    document.getElementById('projBrief').textContent = projects[i].brief;
+    document.getElementById('projPrompt').textContent = projects[i].prompt;
+    document.getElementById('projCopyFeedback').textContent = '';
+  }
+
+  function copyProjectPrompt() {
+    const text = document.getElementById('projPrompt').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      document.getElementById('projCopyFeedback').textContent = '✓ copied';
+      setTimeout(() => document.getElementById('projCopyFeedback').textContent = '', 1500);
+    }).catch(() => {
+      document.getElementById('projCopyFeedback').textContent = 'select the text above to copy';
+    });
+  }
+
+  const buildLoopSteps = [
+    { icon: '📝', label: 'Prompt', text: 'Paste your starter prompt into Claude Code, Cursor, or Replit.' },
+    { icon: '⚙️', label: 'Run', text: 'Run what it gives you. Something almost always breaks the first time. That\'s normal.' },
+    { icon: '🐛', label: 'Error', text: 'Copy the exact error message and paste it back. Don\'t describe it from memory.' },
+    { icon: '🔁', label: 'Fix', text: 'It fixes it, or asks a clarifying question. Answer honestly, even "I don\'t know, what do you recommend?"' },
+    { icon: '👀', label: 'Review', text: "Read what changed before you accept it. If a line doesn't make sense, ask it to explain that line." },
+    { icon: '🚀', label: 'Ship', text: 'Once it works, deploy it. See the options below.' }
+  ];
+
+  function runBuildLoop() {
+    const container = document.getElementById('buildSteps');
+    const btn = document.getElementById('buildBtn');
+    container.innerHTML = '';
+    btn.disabled = true;
+    btn.textContent = 'Walking through it…';
+    buildLoopSteps.forEach((step, i) => {
+      setTimeout(() => {
+        const row = document.createElement('div');
+        row.style.cssText = 'display:flex; gap:12px; align-items:flex-start; opacity:0; transition:opacity .3s ease;';
+        row.innerHTML = `<span style="font-size:1.2rem;">${step.icon}</span><div><strong style="color:var(--accent); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.04em;">${step.label}</strong><p style="margin:2px 0 0; font-size:0.9rem; color:var(--text);">${step.text}</p></div>`;
+        container.appendChild(row);
+        requestAnimationFrame(() => row.style.opacity = '1');
+        if (i === buildLoopSteps.length - 1) {
+          btn.textContent = '↻ Run again';
+          btn.disabled = false;
+        }
+      }, i * 850);
+    });
+  }
+</script>
+</body>
+</html>

@@ -16,6 +16,7 @@ Built for a friend who wanted to learn AI, and for anyone else who lands here. N
 6. [No-Code AI Builders](lessons/06-no-code-ai-builders.html)
 7. [AI Agents](lessons/07-ai-agents.html)
 8. [Using AI Responsibly](lessons/08-using-ai-responsibly.html)
+9. [Build Something Real](lessons/09-build-something-real.html) — capstone project
 
 ## Running locally
 
